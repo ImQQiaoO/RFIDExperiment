@@ -16,10 +16,10 @@ public class MainPage extends JFrame {
     private void init() {
         JPanel ParityCheckPanel = new ParityCheck();
         JPanel HammingCheckPanel = new HammingCheck();
-        JPanel panel3 = new JPanel();
+        JPanel CRCPanel = new CRC();
         tabbedPane.addTab("奇偶校验", ParityCheckPanel);
         tabbedPane.addTab("海明码校验", HammingCheckPanel);
-        tabbedPane.addTab("CRC校验", panel3);
+        tabbedPane.addTab("CRC校验", CRCPanel);
         tabbedPane.setTabPlacement(JTabbedPane.TOP); // 设置选项卡位置为上方
         this.add(tabbedPane);
     }

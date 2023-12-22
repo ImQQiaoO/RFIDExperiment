@@ -61,10 +61,10 @@ public class HammingCheck extends JPanel {
                 JOptionPane.showMessageDialog(null, "输入不合法，请重新输入！", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            System.out.println(input);  // TODO delete
+            System.out.println(input);
             // 计算海明码
             correctHamming = calculateHammingCode(input);
-            System.out.println(correctHamming);  // TODO delete
+            System.out.println(correctHamming);
             // 将得到的海明码显示在文本输入框中
             correctHammingField.setText(correctHamming);
             showCheckingBits(correctHamming);
@@ -100,19 +100,19 @@ public class HammingCheck extends JPanel {
         }
         // calculate parity bits
         for (int i = 0; i < r; ++i) {
-            int pos = (int) Math.pow(2, i);
+            int pos = (int) Math.pow(2, i);     // pos为奇偶校验位的位置
             int count = 0;//
             int k = pos - 1;
-            while (k < hammingCode.length()) {
-                for (int l = k; l < k + pos && l < hammingCode.length(); l++) {
-                    if (hammingCode.charAt(l) == '1') {
+            while (k < hammingCode.length()) {  // 从奇偶校验位开始，每隔2*pos个位置，统计pos个数中1的个数
+                for (int l = k; l < k + pos && l < hammingCode.length(); l++) { // 统计pos个数中1的个数
+                    if (hammingCode.charAt(l) == '1') { // 如果是1，计数器加1
                         ++count;
                     }
                 }
-                k += 2 * pos;
+                k += 2 * pos;   // 跳过pos个数，从下一个pos个数开始统计
             }
             // if count of 1s is odd, set parity bit to 1
-            if (count % 2 == 1) {
+            if (count % 2 == 1) {   // 如果1的个数是奇数，奇偶校验位为1
                 hammingCode.setCharAt(pos - 1, '1');
             }
         }
@@ -197,17 +197,17 @@ public class HammingCheck extends JPanel {
             int pos = (int) Math.pow(2, i);
             int count = 0;
             int k = pos - 1;
-            while (k < hammingCode.length()) {
-                for (int l = k; l < k + pos && l < hammingCode.length(); l++) {
+            while (k < hammingCode.length()) {  // 从奇偶校验位开始，每隔2*pos个位置，统计pos个数中1的个数
+                for (int l = k; l < k + pos && l < hammingCode.length(); l++) { // 统计pos个数中1的个数
                     if (hammingCode.charAt(l) == '1') {
                         count++;
                     }
                 }
-                k += 2 * pos;
+                k += 2 * pos;   // 跳过pos个数，从下一个pos个数开始统计
             }
             // if count of 1s is odd, set parity bit to 1
-            if (count % 2 == 1) {
-                errorPos += pos;
+            if (count % 2 == 1) {   // 如果1的个数是奇数，奇偶校验位为1
+                errorPos += pos;    // 记录错误位置
             }
         }
         return errorPos;
